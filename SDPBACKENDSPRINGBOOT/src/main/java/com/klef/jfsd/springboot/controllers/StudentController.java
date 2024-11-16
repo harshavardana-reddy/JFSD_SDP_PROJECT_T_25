@@ -89,7 +89,7 @@ public class StudentController {
 		try {
 			return ResponseEntity.status(200).body(service.viewAssignmentByID(aid));
 		} catch (Exception e) {
-			return ResponseEntity.status(500).body("Error : "+e.getMessage());
+			return ResponseEntity.status(500).body(e.getMessage());
 		}
 	}
 	
