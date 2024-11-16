@@ -8,8 +8,8 @@ export default function Home() {
       <div className='max-w-[1200px] w-full h-[800px] mx-auto text-center flex flex-col justify-center'>
         <div className='flex items-center justify-between'>
           <h1 className='text-6xl font-bold text-left slide-in'>
-            Online Assignments <br />
-            Submission & <br />
+            Online Assignments
+            Submission &
             grading system
           </h1>
 

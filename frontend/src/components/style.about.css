@@ -1,0 +1,110 @@
+.about {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 1.5s ease-in-out; /* Page fade-in effect */
+}
+
+/* 3D Heading Effect */
+.about h1 {
+  font-size: 36px;
+  color: #42a5f5;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  transform: perspective(500px) rotateX(15deg); /* Initial 3D tilt */
+  transition: transform 0.4s ease-in-out;
+}
+
+.about h1:hover {
+  transform: perspective(500px) rotateX(0deg); /* Flat when hovered */
+}
+
+/* Text Content with Animation */
+.about p {
+  width: 70%;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #37474f;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.8s ease-in-out; /* Slide in effect */
+}
+
+/* List Style for Features */
+.about ul {
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about ul li {
+  font-size: 18px;
+  background: #f5f5f5;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover Effect on List Items */
+.about ul li:hover {
+  transform: translateY(-5px); /* Pop-out effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Back Button with Animation */
+.about .back-button {
+  margin-top: 30px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #42a5f5;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  animation: bounce 1s infinite; /* Button bounce effect */
+}
+
+.about .back-button:hover {
+  background: #1e88e5;
+  transform: scale(1.1); /* Scale effect on hover */
+}
+
+/* Button Bounce Animation */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}

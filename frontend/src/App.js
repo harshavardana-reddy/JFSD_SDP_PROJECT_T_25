@@ -51,8 +51,8 @@ function App() {
           ):(
             <MainNavBar
               onAdminLogin={onAdminLogin}
-              onStudentLogin={onStudentLogin}
               onFacultyLogin={onFacultyLogin}
+              onStudentLogin={onStudentLogin}
             />
           )}
         </BrowserRouter>

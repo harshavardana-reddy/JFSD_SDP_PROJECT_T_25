@@ -1,4 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body{
+    height: 100%;
+    margin: 0;
+    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; 
+}
+#root {
+    height: 100%; /* Ensure root container fills the entire viewport */
+  }
 
+.admin-layout {
+    height: 100vh;
+    background-image:linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  .admin-content {
+    height: calc(100vh - 60px); /* Adjust for navbar height */
+    overflow-y: auto;
+  }
+  
