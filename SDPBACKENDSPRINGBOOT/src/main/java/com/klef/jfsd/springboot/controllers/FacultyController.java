@@ -35,7 +35,7 @@ public class FacultyController {
 			return ResponseEntity.status(200).body(response);
 			
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error in Login: " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error in Login please Check: " + e.getMessage());
 		}
 	}
 
