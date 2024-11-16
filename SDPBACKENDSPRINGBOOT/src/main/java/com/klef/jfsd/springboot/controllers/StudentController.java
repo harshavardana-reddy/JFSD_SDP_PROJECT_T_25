@@ -36,8 +36,13 @@ public class StudentController {
 		try {
 			String username = payload.get("username");
 			String password = payload.get("password");
+
+			
 			
 			StudentDTO student = service.checkStudentLogin(username, password);
+			if(student.getSstatus().equals("INACTICE")){
+				return ResponseEntity.status(404).body("InActive Account ,Please Contact administrator");
+			}
 			if(student==null) {
 				return ResponseEntity.status(404).body("Invalid Credential:Student Not Found");
 			}
