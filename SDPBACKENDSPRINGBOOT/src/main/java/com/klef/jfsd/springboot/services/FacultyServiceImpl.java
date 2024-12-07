@@ -86,7 +86,7 @@ public class FacultyServiceImpl implements FacultyService {
 		for (FacultyCourseMap map : facultyCourseMaps) {
 			courses.add(courseRepository.findById(map.getCid()).orElse(null));
 		}
-		System.out.println(courses.getFirst());
+		// System.out.println(courses.getFirst());
 		return courses;
 	}
 
@@ -384,7 +384,7 @@ public class FacultyServiceImpl implements FacultyService {
 		for (FacultyCourseMap map : facultyCourseMaps) {
 			courses.add(courseRepository.findById(map.getCid()).orElse(null));
 		}
-		System.out.println(courses.getFirst());
+		// System.out.println(courses.getFirst());
 		List<Course> instructorCourses = courseRepository.findByCourseInstructorID(fid);
 		
 		counts.add((long)facultyCourseMaps.size());
@@ -396,7 +396,7 @@ public class FacultyServiceImpl implements FacultyService {
 		counts.add(pending);
 		counts.add(completed);
 		System.out.println(pending+","+completed);
-		System.out.println(facultyCourseMaps.getFirst());
+		// System.out.println(facultyCourseMaps.getFirst());
 		return counts;
 	}
 
