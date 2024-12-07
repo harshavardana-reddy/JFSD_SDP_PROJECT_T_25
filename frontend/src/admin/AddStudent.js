@@ -49,26 +49,41 @@ export default function AddStudent() {
     setStudent({ ...student, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
     if (student.age < 17) {
       toast.error("Minimum age should be 17.");
       return;
     }
+  
+    
+    const toastId = toast.loading("Processing your request...");
+  
     try {
-      const response = await axios.post(`${BackendURLS.Admin}/addstudent`,student);
-      if(response.status === 200){
-        toast.success(response.data);
+      const response = await axios.post(`${BackendURLS.Admin}/addstudent`, student);
+      if (response.status === 200) {
+        
+        toast.update(toastId, {
+          render: response.data,
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
       }
     } catch (error) {
-        if (error.response?.data && error.response.data.includes("Duplicate entry")) {
-          toast.error("Duplicate entry found: The contact or email already exists.");
-        } else {
-          toast.error("An error occurred while adding the student.");
-        }
+      
+      toast.update(toastId, {
+        render: error.response?.data.includes("Duplicate entry")
+          ? "Duplicate entry found: The contact or email already exists."
+          : "An error occurred while adding the student.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
-
   };
+  
 
   return (
     <div>

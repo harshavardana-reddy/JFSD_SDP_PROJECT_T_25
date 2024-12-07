@@ -2,6 +2,8 @@ package com.klef.jfsd.springboot.models;
 
 import java.sql.Blob;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -30,9 +32,12 @@ public class Faculty {
 	private String dob;
 	@Column(name = "faculty_age",nullable = false)
 	private double age;
+	@JsonIgnore
 	@Column(name = "faculty_profile")
 	private Blob fprofile;
 	@Column(name = "faculty_status",nullable = false)
 	private String fstatus;
+	@Column(name = "faculty_gender",nullable = false)
+	private String gender;
 
 }

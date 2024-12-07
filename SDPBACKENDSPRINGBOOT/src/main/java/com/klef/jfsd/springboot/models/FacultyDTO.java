@@ -10,6 +10,7 @@ public class FacultyDTO {
 	private String femail;
 	private String fdepartment;
 	private String fcontact;
+	private String gender;
 	private String dob;
 	private double age;
 	private byte[] fprofile;

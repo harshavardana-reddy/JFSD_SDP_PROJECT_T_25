@@ -123,7 +123,7 @@ export default function MapstudentStudent() {
         setSelectedAcademicYear(null);
         setSelectedDepartment(null);
         setSelectedSemester(null);
-        setFilteredCourses(null);
+        setFilteredCourses([]);
         
       }
     } catch (error) {

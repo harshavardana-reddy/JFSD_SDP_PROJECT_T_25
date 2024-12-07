@@ -20,7 +20,7 @@ export default function FacultyMappedCourse() {
     setFacultyData(faculty)
     try {
       const response = await axios.get(
-        `${BackendURLS.Admin}/viewfacultycourses?id=${faculty.fid}`
+        `${BackendURLS.Faculty}/mycourses?id=${faculty.fid}`
       );
       setCourseData(response.data);
       // console.log("data fetched")
@@ -76,8 +76,9 @@ export default function FacultyMappedCourse() {
             <TableColumn>ACADEMIC YEAR</TableColumn>
             <TableColumn>INSTRUCTOR ID</TableColumn>
             <TableColumn>INSTRUCTOR NAME</TableColumn>
+            <TableColumn>ACTIONS</TableColumn>
           </TableHeader>
-          <TableBody emptyContent={"No Courses Are Mapped to This Student."}>
+          <TableBody emptyContent={"No Courses Are Mapped to This Faculty."}>
             {currentCourses.map((course, index) => (
               <TableRow key={index}>
                 <TableCell>{course.cid}</TableCell>
@@ -88,6 +89,9 @@ export default function FacultyMappedCourse() {
                 <TableCell>{course.academicyear}</TableCell>
                 <TableCell>{course.courseInstructorID}</TableCell>
                 <TableCell>{course.courseInstructorName}</TableCell>
+                <TableCell>
+                  <Button color='success' variant='shadow' onClick={()=>navigate(`/faculty/facultycourseassignments/${course.cid}`)} >View Assignments</Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -105,7 +109,7 @@ export default function FacultyMappedCourse() {
         </div>
 
         <div style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }} className="mt-3">
-          <Button color="secondary" variant="shadow" onClick={()=>navigate('/admin/mapcoursefaculty')}>
+          <Button color="secondary" variant="shadow" onClick={()=>window.history.back()}>
             Go back
           </Button>
         </div>

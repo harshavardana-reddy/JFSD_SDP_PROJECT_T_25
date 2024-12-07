@@ -75,7 +75,7 @@ export default function ViewFacultyCourse() {
             <TableColumn>INSTRUCTOR ID</TableColumn>
             <TableColumn>INSTRUCTOR NAME</TableColumn>
           </TableHeader>
-          <TableBody emptyContent={"No Courses Are Mapped to This Student."}>
+          <TableBody emptyContent={"No Courses Are Mapped to This Faculty."}>
             {currentCourses.map((course, index) => (
               <TableRow key={index}>
                 <TableCell>{course.cid}</TableCell>

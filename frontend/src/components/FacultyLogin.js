@@ -20,10 +20,11 @@ export default function FacultyLogin({onFacultyLogin}) {
         faculty
       );
       if (response.status === 200 || response.status === 201) {
-        onFacultyLogin();
+
         toast.success("Successfully logged in",{theme:'colored'});
         sessionStorage.setItem("faculty",JSON.stringify(response.data));
         setTimeout(()=>{
+          onFacultyLogin();
           navigate("/faculty/facultyhome");
         },1000)
       }

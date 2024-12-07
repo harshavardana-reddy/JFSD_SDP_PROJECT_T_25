@@ -102,7 +102,7 @@ export default function ViewStudentCourse() {
         </div>
 
         <div style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }} className="mt-3">
-          <Button color="secondary" variant="shadow" onClick={()=>navigate('/admin/mapcoursestudent')}>
+          <Button color="secondary" variant="shadow" onClick={()=>window.history.back()}>
             Go back
           </Button>
         </div>

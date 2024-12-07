@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHV INSTITUTIONS</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" 
+      style="background-color: #ffffff; margin-top: 20px; border: 1px solid #dddddd; border-radius: 8px; padding: 20px;">
+      <tr>
+        <td align="center" style="background-color: #0047ab; color: #ffffff; padding: 10px 0;">
+          <h1 style="margin: 0; font-size: 24px;">SHV INSTITUTIONS</h1>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 20px; color: #333333;">
+          <h3 style="font-size: 18px;">Welcome, <span th:text="${name}"></span></h3>
+          <p style="font-size: 16px; line-height: 1.5;">
+            You have been successfully added to the Assignments Portal. Your unique Faculty ID is 
+            <span style="color: #0047ab; background-color: #fff3cd; padding: 4px 8px; border-radius: 4px; font-weight: bold;" 
+              th:text="${sid}"></span>.Now your can login through Faculty Login in Assignments Portal.
+          </p>
+          <table border="0" cellpadding="5" cellspacing="0" width="100%" style="margin-top: 20px; font-size: 16px; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th style="background-color: #f4f4f4; border: 1px solid #dddddd; padding: 8px; text-align: left;">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border: 1px solid #dddddd; padding: 8px;">Username: Your Faculty ID.</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #dddddd; padding: 8px;">Password: Your Date of Birth (Format: DD-MM-YYYY)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="color: #d9534f; font-weight: bold; margin-top: 20px;">Note: Change your password after login.</p>
+          <p style="margin-top: 10px;">For any issues and queries, contact the administrator.</p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="background-color: #0047ab; color: #ffffff; padding: 10px;">
+          <p style="margin: 0;">&copy; 2024 SHV Institutions. All rights reserved.</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

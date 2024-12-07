@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHV INSTITUTIONS</title>
+  </head>
+  <body>
+    <h1>Hello,<span th:text="${name}" ></span></h1>
+    <p>New course added to your assignment portal.</p>
+    <table>
+        <tr>
+            <td>COURSE NAME:</td>
+            <td><span th:text="${cname}" ></span></td>
+        </tr>
+        <tr>
+            <td>COURSE CODE:</td>
+            <td><span th:text="${code}" ></span></td>
+        </tr>
+        <tr>
+            <td>COURSE SEMESTER:</td>
+            <td><span th:text="${sem}" ></span></td>
+        </tr>
+        <tr>
+            <td>COURSE ACADEMIC YEAR:</td>
+            <td><span th:text="${academicyear}" ></span></td>
+        </tr>
+    </table>
+  </body>
+</html>

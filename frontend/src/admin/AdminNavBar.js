@@ -4,10 +4,17 @@ import AddCourse from "./AddCourse";
 import AddFaculty from "./AddFaculty";
 import AddStudent from "./AddStudent";
 import AdminHome from "./AdminHome";
+import EditFaculty from "./EditFaculty";
+import EditStudent from "./EditStudent";
+import logo from "./images/logo.jpeg";
+import ProfileIMG from "./images/noimage.jpg";
 import MapCourseFaculty from "./MapCourseFaculty";
 import MapCourseStudent from "./MapCourseStudent";
 import PageNotFound from "./PageNotFound";
 import ReviewSubmissions from "./ReviewSubmissions";
+import UploadAssignment from "./UploadAssignment";
+import ViewAssignmentByID from "./ViewAssignmentByID";
+import ViewAssignments from "./ViewAssignments";
 import ViewCourses from "./ViewCourses";
 import ViewFaculty from "./ViewFaculty";
 import ViewFacultyCourse from "./ViewFacultyCourse";
@@ -16,12 +23,9 @@ import ViewStudentCourse from "./ViewStudentCourse";
 import ViewStudentProfile from "./ViewStudentProfile";
 import ViewStudents from "./ViewStudents";
 import ViewSubmissions from "./ViewSubmissions";
-import logo from "./images/logo.jpeg";
-import ProfileIMG from "./images/noimage.jpg";
-import UploadAssignment from "./UploadAssignment";
-import ViewAssignments from "./ViewAssignments";
-import ViewAssignmentByID from "./ViewAssignmentByID";
-
+import CourseRegisteredStudents from "./CourseRegisteredStudents";
+import ViewCourseAssignments from './ViewCourseAssignments';
+import ViewPDFPage from "./ViewPDFPage";
 
 export default function AdminNavBar() {
   const [isStudentDropdownOpen, setStudentDropdownOpen] = useState(false);
@@ -38,13 +42,12 @@ export default function AdminNavBar() {
     setCourseDropdownOpen(!isCourseDropdownOpen);
   const toggleProfileOpen = () => setProfileOpen(!isProfileOpen);
 
-
-  const logOut = ()=>{
+  const logOut = () => {
     sessionStorage.removeItem("admin");
     sessionStorage.removeItem("isAdminLoggedIn");
-    navigate('/adminlogin');
+    navigate("/adminlogin");
     window.location.reload();
-  }
+  };
 
   return (
     <div className="admin-layout">
@@ -164,7 +167,6 @@ export default function AdminNavBar() {
                       View Students
                     </Link>
                   </li>
-                  
                 </ul>
               )}
             </li>
@@ -212,8 +214,6 @@ export default function AdminNavBar() {
                       View Faculty
                     </Link>
                   </li>
-                  
-                  
                 </ul>
               )}
             </li>
@@ -297,9 +297,8 @@ export default function AdminNavBar() {
                 </span>
               </Link>
             </li>
-            
+
             <li>
-             
               <Link
                 onClick={logOut}
                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -352,13 +351,32 @@ export default function AdminNavBar() {
             element={<ViewStudentProfile />}
           />
           <Route
-            path="/admin/reviewsubmissions"
+            path="/admin/reviewassignment/:subid"
             element={<ReviewSubmissions />}
           />
-          <Route path="/admin/viewsubmissions" element={<ViewSubmissions />} />
-          <Route path="/admin/uploadassignment/:cid" element={<UploadAssignment/> } />
-          <Route path="/admin/viewallassignments" element={<ViewAssignments/> } />
-          <Route path="/admin/viewassignment/:id" element={<ViewAssignmentByID/>} />
+          <Route path="/admin/viewsubmissions/:aid" element={<ViewSubmissions />} />
+          <Route
+            path="/admin/uploadassignment/:cid"
+            element={<UploadAssignment />}
+          />
+          <Route
+            path="/admin/viewallassignments"
+            element={<ViewAssignments />}
+          />
+          <Route
+            path="/admin/viewassignment/:id"
+            element={<ViewAssignmentByID />}
+          />
+          <Route path="/admin/updatestudent/:sid" element={<EditStudent />} />
+          <Route path="/admin/updatefaculty/:fid" element={<EditFaculty />} />
+          <Route
+            path="/admin/studentprofile/:sid"
+            element={<ViewStudentProfile />}
+          />
+          <Route path="/admin/registeredstudents/:cid" element={<CourseRegisteredStudents/>} />
+          <Route path="/admin/viewcourseassignments/:cid" element={<ViewCourseAssignments/>} />
+          <Route path="/admin/view-submission-pdf" element={<ViewPDFPage/>} />
+          <Route path="/admin/view-assignment-pdf" element={<ViewPDFPage/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

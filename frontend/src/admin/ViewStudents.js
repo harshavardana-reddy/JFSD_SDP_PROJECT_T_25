@@ -33,6 +33,7 @@ import { ChevronDownIcon } from './tableutils/ChevRonDownIcon';
 import { SearchIcon } from './tableutils/SearchIcon';
 import { PlusIcon } from './tableutils/PlusIcon';
 import { capitalize } from "./tableutils/utils";
+import { toast, ToastContainer } from "react-toastify";
 
 const statusColorMap = {
   active: "success",
@@ -74,25 +75,36 @@ export default function ViewStudents() {
     height: "100vh",
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BackendURLS.Admin}/viewstudents`);
+      const studentWithProfiles = response.data.map((student) => {
+        const sprofile = `data:image/jpeg;base64,${student.sprofile}`;
+        return { ...student, sprofile };
+      });
+      setStudentData(studentWithProfiles);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BackendURLS.Admin}/viewstudents`);
-        const studentWithProfiles = response.data.map((student) => {
-          const sprofile = `data:image/jpeg;base64,${student.sprofile}`;
-          return { ...student, sprofile };
-        });
-        setStudentData(studentWithProfiles);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
+    
     fetchData();
   }, []);
 
-  const handleStatus = ()=>{
+  const handleStatus = async(sid)=>{
+    try {
+      const response = await axios.put(`${BackendURLS.Admin}/changestatusstudent/${sid}`);
+      toast.success(response.data,{theme:'colored'});
+      fetchData();
+      setSBox(false);
+    } catch (error) {
+      toast.error(error.message);
+      setSBox(false);
 
+    }
   }
 
   const handleDelete = ()=>{
@@ -258,7 +270,7 @@ export default function ViewStudents() {
                 <DropdownItem
                   aria-label="View"
                   onClick={() =>
-                    navigate(`/admin/viewstudent/${user.sid}`)
+                    navigate(`/admin/studentprofile/${user.sid}`)
                   }
                 >
                   View
@@ -279,9 +291,9 @@ export default function ViewStudents() {
                     setSBox(true);
                   }}
                 >
-                  Set Status
+                  Edit Status
                 </DropdownItem>
-                <DropdownItem
+                {/* <DropdownItem
                   color="danger"
                   variant="shadow"
                   aria-label="Delete"
@@ -291,7 +303,7 @@ export default function ViewStudents() {
                   }}
                 >
                   Delete
-                </DropdownItem>
+                </DropdownItem> */}
               </DropdownMenu>
 
             </Dropdown>
@@ -508,7 +520,9 @@ export default function ViewStudents() {
           )}
         </ModalContent>
       </Modal>
+
     </div>
+    <ToastContainer/>
     </div>
   );
 }

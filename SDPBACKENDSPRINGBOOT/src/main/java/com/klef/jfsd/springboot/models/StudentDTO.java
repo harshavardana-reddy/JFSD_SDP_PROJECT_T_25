@@ -7,6 +7,7 @@ public class StudentDTO {
 	private String sid;
     private String sname;
     private String semail;
+    private String gender;
     private String sdepartment;
     private String scontact;
     private String dob;

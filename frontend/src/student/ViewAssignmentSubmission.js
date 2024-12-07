@@ -74,7 +74,7 @@ export default function ViewAssignmentSubmission() {
               <TableCell>{submission.marks}</TableCell>
               <TableCell>{submission.submissionDate}</TableCell>
               <TableCell>
-                <Button color='success' variant='shadow' onClick={()=>navigate(`/student/submission`)} >View</Button>
+                <Button color='success' variant='shadow' onClick={()=>navigate(`/student/submission/${submission.submissionId}`)} >View</Button>
               </TableCell>
             </TableRow>
           ))}

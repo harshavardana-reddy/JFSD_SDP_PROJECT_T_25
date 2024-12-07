@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SHV INSTITUTIONS</title>
+  </head>
+  <body style="font-family: Arial, sans-serif; background: linear-gradient(135deg, #f3f4f6, #e5e7eb); margin: 0; padding: 20px;">
+    <div style="max-width: 600px; margin: auto; background: white; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px; padding: 20px;">
+      <h1 style="color: #2d3748; text-align: center; font-size: 2.5em; margin-bottom: 20px;">
+        Hello, <span th:text="${name}" style="color: #4299e1;"></span>
+      </h1>
+      <p style="color: #4a5568; font-size: 1.2em; text-align: center; line-height: 1.6;">
+        Your submission for <span th:text="${aname}" style="font-weight: bold; color: #2b6cb0;"></span> has been evaluated. Please check your marks and feedback in the Assignment Portal.
+      </p>
+      <table style="width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid #e2e8f0;">
+        <tr style="background-color: #edf2f7;">
+          <th style="padding: 10px; text-align: left; font-size: 1em; color: #2d3748;">ASSIGNMENT NAME</th>
+          <td style="padding: 10px; text-align: left; font-size: 1em; color: #2b6cb0;" th:text="${aname}"></td>
+        </tr>
+        <tr style="background-color: #f7fafc;">
+          <th style="padding: 10px; text-align: left; font-size: 1em; color: #2d3748;">STATUS</th>
+          <td style="padding: 10px; text-align: left; font-size: 1em; color: #38a169;" th:text="${status}"></td>
+        </tr>
+      </table>
+      <!-- <p style="text-align: center; margin-top: 20px;">
+        <a href="#" style="text-decoration: none; color: white; background-color: #2b6cb0; padding: 10px 20px; border-radius: 5px; font-size: 1.2em;">Go to Assignment Portal</a>
+      </p> -->
+    </div>
+  </body>
+</html>

@@ -17,6 +17,22 @@ export default function StudentProfile() {
   const [modal, setModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null); // State to track uploaded file
+  const [oldpassword, setOldPassword] = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [IP,setIP] = useState("");
+
+  const getData = async () => {
+    const res = await axios.get("https://api.ipify.org/?format=json");
+    console.log(res.data);
+    setIP(res.data.ip);
+  };
+
+  useEffect(() => {
+    //passing getData method to the lifecycle method
+    getData();
+  }, []);
+
 
   const fetchStudent = async () => {
     try {
@@ -44,6 +60,50 @@ export default function StudentProfile() {
     }
   };
 
+  const changePassword = async()=>{
+    if(oldpassword === newpassword){
+      toast.warn("Old Password and New Password Are same.")
+      return;
+    }
+    if(newpassword!==confirmPassword){
+      toast.warn("New Password and Confirm Password Are not same.")
+      return;
+    }
+
+
+    const data = {
+      sid:student.sid,
+      oldpassword:oldpassword,
+      newpassword:newpassword,
+      ip:IP
+    }
+    const loadingToast = toast.loading("Changing Password",{closeButton:true});
+    try {
+      const response = await axios.put(`${BackendURLS.Student}/changepassword`,data);
+      if(response.status === 200){
+        toast.update(loadingToast,{
+          render:response.data,
+          type:"success",
+          isLoading:false,
+          theme:'colored',
+          autoClose: 3000,
+        })
+        setProfileModal(false)
+      }
+    } catch (error) {
+      console.log(error);
+      if(error.response){
+        toast.update(loadingToast,{
+          render:error.response.data,
+          type:"error",
+          isLoading:false,
+          theme:'colored',
+          autoClose: 3000,
+        })
+      }
+    }
+  }
+
   const updateProfilePicture = async () => {
     if (!selectedFile) {
       toast.error("Please select a file before submitting.");
@@ -58,6 +118,7 @@ export default function StudentProfile() {
     const loadingToast = toast.loading("Updating profile picture...");
 
     try {
+      // eslint-disable-next-line
       const response = await axios.put(
         `${BackendURLS.Student}/updatestudentprofile`,
         formData,
@@ -108,14 +169,6 @@ export default function StudentProfile() {
     animation: fadeIn 1s ease-in-out;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 
   .profile-page {
     display: flex;
@@ -333,7 +386,7 @@ export default function StudentProfile() {
                       className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring focus:ring-primary-300 focus:outline-none"
                       placeholder="Enter current password"
                       onChange={(e) =>
-                        console.log("Current password:", e.target.value)
+                        setOldPassword(e.target.value)
                       } // Update state here
                     />
                   </div>
@@ -350,7 +403,7 @@ export default function StudentProfile() {
                       className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring focus:ring-primary-300 focus:outline-none"
                       placeholder="Enter new password"
                       onChange={(e) =>
-                        console.log("New password:", e.target.value)
+                        setNewPassword(e.target.value)
                       } // Update state here
                     />
                   </div>
@@ -367,8 +420,8 @@ export default function StudentProfile() {
                       className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring focus:ring-primary-300 focus:outline-none"
                       placeholder="Confirm new password"
                       onChange={(e) =>
-                        console.log("Confirm password:", e.target.value)
-                      } // Update state here
+                        setConfirmPassword(e.target.value)
+                      } 
                     />
                   </div>
                 </div>
@@ -376,7 +429,7 @@ export default function StudentProfile() {
               <ModalFooter>
                 <Button
                   color="success"
-                  onClick={() => console.log("Password updated")}
+                  onClick={() => changePassword()}
                 >
                   Save
                 </Button>

@@ -196,12 +196,7 @@ export default function ViewFaculty() {
 
   const bottomContent = useMemo(() => {
     return (
-      <div clasfname="py-2 px-2 flex justify-between items-center">
-        <span clasfname="w-[30%] text-small text-default-400">
-          {selectedKeys.size === facultyData.length
-            ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
-        </span>
+      <div clasfname="py-2 px-2 flex justify-center ">
         <Pagination
           isCompact
           showControls
@@ -386,13 +381,13 @@ export default function ViewFaculty() {
             className="flex justify-between items-center"
             style={{ color: "black" }}
           >
-            <span className="text-default-400 text-small">
+            <span className=" text-black text-small">
               Total {facultyData.length} users
             </span>
-            <label className="flex items-center text-default-400 text-small">
+            <label className="flex items-center text-black text-small">
               Rows per page:
               <select
-                className="bg-transparent outline-none text-default-400 text-small"
+                className="bg-transparent outline-none text-black text-small"
                 onChange={onRowsPerPageChange}
               >
                 <option value="5">5</option>
@@ -477,7 +472,7 @@ export default function ViewFaculty() {
             <>
               <ModalHeader clasfname="flex flex-col gap-1">Change Status</ModalHeader>
               <ModalBody>
-                <p>Are You Sure you want to change the status of the employee (ID : {empIDS}) ?</p>
+                <p>Are You Sure you want to change the status of the Faculty (ID : {empIDS}) ?</p>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
@@ -497,7 +492,7 @@ export default function ViewFaculty() {
             <>
               <ModalHeader clasfname="flex flex-col gap-1">Change Status</ModalHeader>
               <ModalBody>
-                <p>Are You Sure you want to Delete employee (ID : {empIDD}) ?</p>
+                <p>Are You Sure you want to Delete Faculty (ID : {empIDD}) ?</p>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>

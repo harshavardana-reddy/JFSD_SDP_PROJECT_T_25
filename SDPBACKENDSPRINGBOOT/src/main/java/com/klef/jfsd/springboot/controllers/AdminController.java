@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +22,10 @@ import com.klef.jfsd.springboot.models.Assignment;
 import com.klef.jfsd.springboot.models.AssignmentDTO;
 import com.klef.jfsd.springboot.models.Course;
 import com.klef.jfsd.springboot.models.Faculty;
+import com.klef.jfsd.springboot.models.FacultyDTO;
 import com.klef.jfsd.springboot.models.Student;
-import com.klef.jfsd.springboot.repositries.CourseRepository;
+import com.klef.jfsd.springboot.models.StudentDTO;
+import com.klef.jfsd.springboot.models.SubmissionDTO;
 import com.klef.jfsd.springboot.services.AdminService;
 
 @RestController
@@ -90,8 +92,9 @@ public class AdminController {
 	}
 
 	@PutMapping("/updatestudent")
-	public ResponseEntity<?> updateStudent(Student student) {
+	public ResponseEntity<?> updateStudent(@RequestBody Student student) {
 		try {
+//			System.out.println(student);
 			return ResponseEntity.status(200).body(adminService.updateStudent(student));
 		} catch (Exception e) {
 			return ResponseEntity.status(400).body("Error updating student" + e.getMessage());
@@ -172,13 +175,13 @@ public class AdminController {
 	}
 	
 	@PostMapping("/uploadassignment")
-	public ResponseEntity<?> uploadAssignment( @RequestParam("assignmentName") String assignmentName,
-            @RequestParam("assignmentQuestion") String assignmentQuestion,
-            @RequestParam("assignmentQuestionPDF") MultipartFile assignmentQuestionPDF,
-            @RequestParam("courseId") String courseId,
-            @RequestParam("marks") double marks,
-            @RequestParam("startdate") String startdate,
-            @RequestParam("deadlinedate") String deadlinedate) {
+	public ResponseEntity<?> uploadAssignment( @RequestParam String assignmentName,
+            @RequestParam String assignmentQuestion,
+            @RequestParam MultipartFile assignmentQuestionPDF,
+            @RequestParam String courseId,
+            @RequestParam double marks,
+            @RequestParam String startdate,
+            @RequestParam String deadlinedate) {
         
         try {
             Assignment assignment = new Assignment();
@@ -222,5 +225,57 @@ public class AdminController {
 	public List<Long> getCounts() {
 		return adminService.getCounts();
 	}
+	
+	@GetMapping("fetchstudent/{id}")
+	public StudentDTO getStudent(@PathVariable("id") String sid) {
+		return adminService.viewStudentByID(sid);
+	}
+	
+	@GetMapping("fetchfaculty")
+	public FacultyDTO getFaculty(@RequestParam("id") String fid) {
+		return adminService.viewFacultyByID(fid);
+	}
+	
+	@PutMapping("/changestatusstudent/{id}")
+	public String changeStudentStatus(@PathVariable("id") String sid) {
+		return adminService.changeStudentStatus(sid);
+	}
+	
+	@PutMapping("/changestatusfaculty/{id}")
+	public String changeFacultyStatus(@PathVariable("id") String sid) {
+		return adminService.changeFacultyStatus(sid);
+	}
+	
+	@GetMapping("courseregisteredstudents")
+	public List<StudentDTO> getCourseStudents(@RequestParam("id") String cid) {
+		return adminService.viewCourseRegistedStudents(cid);
+	} 
+	
+	@GetMapping("/getsubmissions")
+	public List<SubmissionDTO> getAssignmentSubmissions(@RequestParam("id") String aid){
+		return adminService.getSubmissions(aid);
+	}
+	
+	@GetMapping("/courseassignments")
+	public List<AssignmentDTO> courseAssignments(@RequestParam("id") String cid){
+		return adminService.viewUploadedAssignments(cid);
+	}
+	
+	@GetMapping("getcourse")
+	public Course getCourse(@RequestParam("id") String cid) {
+		return adminService.getCourse(cid);
+	}
+	
+	@GetMapping("getsubmission")
+	public SubmissionDTO getSubmission(@RequestParam("id") String subid) {
+		return adminService.getSubmission(subid);
+	}
+	
+	@GetMapping("getassignment")
+	public AssignmentDTO getAssignment(@RequestParam("id") String aid) {
+		return adminService.getAssignment(aid);
+	}
+	
+	
 	
 }

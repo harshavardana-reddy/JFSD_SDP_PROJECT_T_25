@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BackendURLS from '../config';
 import { InputLabel } from '@mui/material';
 import { Button, Link, Modal, ModalBody, ModalContent, ModalHeader, ModalFooter } from '@nextui-org/react';
@@ -12,6 +12,7 @@ export default function ViewAssignmentByID() {
     const [pdfData, setPdfData] = useState(null);
     const [modal,setModal] = useState(false);
     const [status,setStatus] = useState("");
+    const navigate = useNavigate();
     const fetchAssignment = async () => {
         try {
             const response = await axios.get(`${BackendURLS.Admin}/fetchassignment?id=${id}`);
@@ -160,7 +161,7 @@ export default function ViewAssignmentByID() {
                             Go Back
                         </Button>
                         &nbsp;
-                        <Button color="warning" variant='shadow' radius='full' onClick={() => window.history.back()}>
+                        <Button color="warning" variant='shadow' radius='full' onClick={()=>navigate(`/admin/viewsubmissions/${assignment.assignmentId}`)}>
                             View Submissions
                         </Button>
                         &nbsp;

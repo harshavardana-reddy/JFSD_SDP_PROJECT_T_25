@@ -36,6 +36,8 @@ public class Assignment {
 	private String deadlinedate;
 	@Column(name="accept_submissions",nullable = false)
 	private String accept_submission;
+	@Column(name="edit_status",nullable = false)
+	private String editStatus;
 	
 
 }

@@ -85,6 +85,7 @@ export default function ViewStudentCourses() {
             <TableColumn>ACADEMIC YEAR</TableColumn>
             <TableColumn>INSTRUCTOR ID</TableColumn>
             <TableColumn>INSTRUCTOR NAME</TableColumn>
+            <TableColumn>Actions</TableColumn>
           </TableHeader>
           <TableBody emptyContent={"No Courses Are Mapped to you"}>
             {currentCourses.map((course, index) => (
@@ -97,6 +98,9 @@ export default function ViewStudentCourses() {
                 <TableCell>{course.academicyear}</TableCell>
                 <TableCell>{course.courseInstructorID}</TableCell>
                 <TableCell>{course.courseInstructorName}</TableCell>
+                <TableCell>
+                  <Button  >View Assignments</Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

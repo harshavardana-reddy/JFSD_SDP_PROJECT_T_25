@@ -2,7 +2,6 @@ package com.klef.jfsd.springboot.repositries;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.klef.jfsd.springboot.models.Student;
 import com.klef.jfsd.springboot.models.StudentCourseMap;
 import java.util.List;
 

@@ -17,4 +17,5 @@ public class AssignmentDTO {
 	private String startdate;
 	private String deadlinedate;
 	private String accept_submission;
+	private String editStatus;
 }

@@ -8,6 +8,8 @@ import SubmitAssignment from "./SubmitAssignment";
 import ViewAssignmentSubmission from "./ViewAssignmentSubmission";
 import ViewStudentCourses from './ViewStudentCourses';
 import ViewPendingAssignments from "./ViewPendingAssignments";
+import ViewPDF from './ViewPDF';
+import MySubmission from './MySubmission';
 
 export default function StudentNavBar() {
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -90,6 +92,9 @@ export default function StudentNavBar() {
                 <div className="flex flex-col items-start">
                   <span className="text-gray-900 dark:text-white font-semibold">
                     {student.sname}
+                  </span>
+                  <span className="text-gray-900 dark:text-white font-semibold">
+                    ID : {student.sid}
                   </span>
                   <span className="text-gray-500 dark:text-gray-400 text-sm">
                     STUDENT
@@ -187,17 +192,21 @@ export default function StudentNavBar() {
       >
         <Routes>
           <Route path="/student/studenthome" element={<StudentHome />} />
-          <Route path="student/mycourses" element={<ViewStudentCourses />} />
-          <Route path="student/myprofile" element={<StudentProfile />} />
+          <Route path="/student/mycourses" element={<ViewStudentCourses />} />
+          <Route path="/student/myprofile" element={<StudentProfile />} />
           <Route
-            path="student/mysubmissions"
+            path="/student/mysubmissions"
             element={<ViewAssignmentSubmission />}
           />
           <Route
-            path="student/submitassignment/:id"
+            path="/student/submitassignment/:id"
             element={<SubmitAssignment />}
           />
+          
+          <Route path="/student/submission/:subid" element={<MySubmission/>} />
           <Route path="/student/mypendingassignments" element={<ViewPendingAssignments/>} />
+          <Route path="/student/view-assignment-pdf" element={<ViewPDF/>} />
+          <Route path="/student/view-submission-pdf" element={<ViewPDF/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>

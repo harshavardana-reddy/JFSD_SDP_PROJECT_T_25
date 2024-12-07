@@ -72,6 +72,7 @@ export default function UploadAssignment() {
 
   return (
     <div>
+      <h1 className="text-3xl font-bold text-center mt-3 mb-2">Upload Assignment for Course {cid}</h1>
       <div className="p-4 bg-gray-200 shadow-lg rounded-md" id="wrapper">
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
@@ -95,10 +96,12 @@ export default function UploadAssignment() {
               modules={modules}
             />
 
-            <InputLabel>Assignment Question PDF</InputLabel>
+            <InputLabel>Assignment Question PDF
+            <p style={{color:'red'}} >Note : Upload Only in PDF Format.</p>
+            </InputLabel>
             <input
               type="file"
-              accept=".pdf,.doc"
+              accept=".pdf"
               onChange={handleFileChange}
             />
 

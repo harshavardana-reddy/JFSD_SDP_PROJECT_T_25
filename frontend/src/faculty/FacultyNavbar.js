@@ -4,9 +4,17 @@ import logo from "./images/logo.jpeg";
 import PageNotFound from "./PageNotFound";
 import FacultyHome from "./FacultyHome";
 import FacultyMappedCourse from "./FacultyMappedCourse";
-import FacultyViewStudents from "./FacultyViewStudents";
-import ViewStudentProfile from './../admin/ViewStudentProfile';
 import UploadAssignments from "./UploadAssignments";
+import FacultyProfile from "./FacultyProfile";
+import FacultyInstructorCourses from "./FacultyInstructorCourses";
+import CourseAssignments from "./CourseAssignments";
+import AssignmentSubmissions from "./AssignmentSubmissions";
+import ReviewAssignmentSubmissions from "./ReviewAssignmentSubmissions";
+import ViewPDF from "./ViewPDF";
+import FacultyCourseAssignments from "./FacultyCourseAssignments";
+import FacultySubmissions from "./FacultySubmissions";
+import FacultyReviewAssignment from "./FacultyReviewAssignment";
+import CourseRegisteredStudents from './CourseRegisteredStudents';
 
 export default function FacultyNavbar() {
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -23,14 +31,17 @@ export default function FacultyNavbar() {
   };
 
   const fetch = ()=>{
-    const object = JSON.parse(sessionStorage.getItem("faculty"));
-    setFaculty(object);
-    setprofile(`data:image/jpeg;base64,${faculty.fprofile}`)
+    const object = JSON.parse(sessionStorage.getItem("faculty")) || {};
+  setFaculty(object);
+  if (object.fprofile) {
+    setprofile(`data:image/jpeg;base64,${object.fprofile}`);
+}
+
   }
 
   useEffect(()=>{
     fetch();
-  },[faculty])
+  },[])
 
 
 
@@ -113,7 +124,7 @@ export default function FacultyNavbar() {
         <ul className="space-y-2 font-medium">
           <li>
             <Link
-              to="/faculty/studenthome"
+              to="/faculty/facultyhome"
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             >
               <i className="fas fa-link"></i>
@@ -146,7 +157,7 @@ export default function FacultyNavbar() {
           </li>
           <li>
             <Link
-              to="/faculty/mysubmissions"
+              to="/faculty/myinstructorcourses"
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             >
               <i className="fas fa-file-alt"></i>
@@ -155,17 +166,17 @@ export default function FacultyNavbar() {
               </span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               to="/faculty/mypendingassignments"
             >
               <i className="fa fa-sign-out"></i>
               <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
-                View Assignments
+                View Students
               </span>
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -189,11 +200,18 @@ export default function FacultyNavbar() {
       <Routes>
         <Route path="/faculty/facultyhome" element={<FacultyHome/>} />
         <Route path="/faculty/mycourses" element={<FacultyMappedCourse/>} />
-        <Route path="/faculty/myinstructorcourses" />
-        <Route path="/faculty/viewstudents" element={<FacultyViewStudents/>} />
-        <Route path="/faculty/viewstudentprofile/:id" element={<ViewStudentProfile/>} />
+        <Route path="/faculty/myinstructorcourses" element={<FacultyInstructorCourses/>} />
         <Route path="/faculty/uploadassignment/:cid" element={<UploadAssignments/>}/>
-
+        <Route path="/faculty/courseassignments/:cid" element={<CourseAssignments/>} />
+        <Route path="/faculty/facultycourseassignments/:cid" element={<FacultyCourseAssignments/>}   />
+        <Route path="/faculty/facultyassignmentsubmissions/:aid" element={<FacultySubmissions/>} />
+        <Route path="/faculty/myprofile" element={<FacultyProfile/>} />
+        <Route path="/faculty/viewsubmissions/:aid" element={<AssignmentSubmissions/>} />
+        <Route path="/faculty/reviewassignment/:subid" element={<ReviewAssignmentSubmissions/>} />
+        <Route path="/faculty/facultyreviewassignment/:subid" element={<FacultyReviewAssignment/>}/>
+        <Route path="/faculty/view-assignment-pdf" element={<ViewPDF/>} />
+        <Route path="/faculty/view-submission-pdf" element={<ViewPDF/>} />
+        <Route path="/student/coureseregisteredstudents/:cid" element={<CourseRegisteredStudents/>} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
 
