@@ -75,7 +75,7 @@ public class AdminServiceImpl implements AdminService {
 		student.setSid(c_sid);
 		student.setSstatus("ACTIVE");
 		student.setPassword(student.getDob());
-		String filePath = "src/main/resources/noimage.jpg";
+		String filePath = getClass().getClassLoader().getResource("noimage.jpg").getPath();
 		try {
 			byte[] fileBytes = readFileToByteArray(filePath);
 			Blob blob = new javax.sql.rowset.serial.SerialBlob(fileBytes);

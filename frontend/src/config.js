@@ -1,6 +1,6 @@
 const BackendURLS = {
-    Admin:"http://localhost:6969/admin",
-    Student:"http://localhost:6969/student",
-    Faculty:"http://localhost:6969/faculty"
+    Admin:"https://jfsdsdpprojectt25-production.up.railway.app/admin",
+    Student:"https://jfsdsdpprojectt25-production.up.railway.app/student",
+    Faculty:"https://jfsdsdpprojectt25-production.up.railway.app/faculty"
 };
 export default BackendURLS;
