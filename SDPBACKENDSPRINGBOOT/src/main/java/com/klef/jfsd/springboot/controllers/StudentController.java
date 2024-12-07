@@ -57,6 +57,7 @@ public class StudentController {
 	
 	@PostMapping("submitassignment")
 	public ResponseEntity<?> submitAssignment(@RequestParam("assignmentId")String aid,@RequestParam("studentId")String sid,@RequestParam("courseId")String cid,@RequestParam("submissionDate")String date  ,@RequestParam MultipartFile file){
+		System.out.println("Controller Called");
 		try {
 			if(!service.isAssignmentAcceptingSubmissions(aid)) {
 				return ResponseEntity.status(200).body("Assignment is Not Accepting Submissions contact Course Instructor.");
@@ -74,6 +75,7 @@ public class StudentController {
 			
 			
 		} catch (Exception e) { 
+//			e.printStackTrace();
 			return ResponseEntity.status(500).body("Error : "+e.getMessage());
 		}
 	}
@@ -171,5 +173,15 @@ public class StudentController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error " + e.getMessage());
 		}
+	}
+	
+	@GetMapping("/courseassignments")
+	public List<AssignmentDTO> courseAssignments(@RequestParam("id") String cid){
+		return service.viewUploadedAssignments(cid);
+	}
+	
+	@GetMapping("getcourse")
+	public Course getCourse(@RequestParam("id") String cid) {
+		return service.getCourse(cid);
 	}
 }

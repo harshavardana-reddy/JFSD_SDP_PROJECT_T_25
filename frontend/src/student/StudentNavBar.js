@@ -10,6 +10,7 @@ import ViewStudentCourses from './ViewStudentCourses';
 import ViewPendingAssignments from "./ViewPendingAssignments";
 import ViewPDF from './ViewPDF';
 import MySubmission from './MySubmission';
+import ViewAssignments from "./ViewAssignments";
 
 export default function StudentNavBar() {
   const [isProfileOpen, setProfileOpen] = useState(false);
@@ -202,7 +203,7 @@ export default function StudentNavBar() {
             path="/student/submitassignment/:id"
             element={<SubmitAssignment />}
           />
-          
+          <Route path="/student/courseassignments/:cid" element={<ViewAssignments/>} />
           <Route path="/student/submission/:subid" element={<MySubmission/>} />
           <Route path="/student/mypendingassignments" element={<ViewPendingAssignments/>} />
           <Route path="/student/view-assignment-pdf" element={<ViewPDF/>} />

@@ -90,9 +90,14 @@ public class StudentServiceImpl implements StudentService {
 
 		List<FacultyCourseMap> facultyList = facultyCourseMappingRepository.findByCid(course.getCid());
 
-		// Randomly select a faculty member
-		FacultyCourseMap randomFaculty = facultyList.get(new Random().nextInt(facultyList.size()));
+		if (facultyList.isEmpty()) {
+	        throw new IllegalStateException("No faculty members found for the course.");
+	    }
 
+	    // Randomly select a faculty member from the list
+	    Random random = new Random();
+	    FacultyCourseMap randomFaculty = facultyList.get(random.nextInt(facultyList.size()));
+		System.out.println("Service Called");
 		submission.setAssignmentName(assignment.getAssignmentName());
 		submission.setCourseCode(course.getCourseCode());
 		submission.setCourseName(course.getCourseName());
@@ -106,6 +111,48 @@ public class StudentServiceImpl implements StudentService {
 		submissionRepository.save(submission);
 		mailUtil.sendSubmissionMail(student.getSemail(), student.getSname(), submission.getAssignmentName(), submission.getReviewStatus());
 		return "Assignment Submitted with ID = " + subid;
+	}
+	@Override
+	public Course getCourse(String cid) {
+		return courseRepository.findById(cid).get();
+	}
+	
+	@Override
+	public List<AssignmentDTO> viewUploadedAssignments(String courseId) {
+		List<Assignment> assignments = assignmentRepository.findByCourseId(courseId);
+		List<AssignmentDTO> assignmentDTOs = new ArrayList<>();
+
+		for (Assignment assignment : assignments) {
+			AssignmentDTO dto = new AssignmentDTO();
+
+			dto.setAssignmentId(assignment.getAssignmentId());
+			dto.setAssignmentName(assignment.getAssignmentName());
+			dto.setAssignmentQuestion(assignment.getAssignmentQuestion());
+			dto.setCourseId(assignment.getCourseId());
+			dto.setMarks(assignment.getMarks());
+			dto.setCourseName(assignment.getCourseName());
+			dto.setCourseCode(assignment.getCourseCode());
+			dto.setStartdate(assignment.getStartdate());
+			dto.setDeadlinedate(assignment.getDeadlinedate());
+			dto.setAccept_submission(assignment.getAccept_submission());
+			dto.setEditStatus(assignment.getEditStatus());
+
+			try {
+				Blob blob = assignment.getAssignmentQuestionPDF();
+				if (blob != null) {
+					int blobLength = (int) blob.length();
+					byte[] bytes = blob.getBytes(1, blobLength);
+					dto.setAssignmentQuestionPDF(bytes);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				dto.setAssignmentQuestionPDF(null);
+			}
+
+			assignmentDTOs.add(dto);
+		}
+
+		return assignmentDTOs;
 	}
 
 	@Override

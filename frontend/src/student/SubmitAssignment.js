@@ -218,7 +218,7 @@ export default function SubmitAssignment() {
 
   if (isLoading1 || isLoading2) {
     return (
-      <div classname="flex justify-center h-full">
+      <div className="flex justify-center h-full">
         <Spinner size="xl" />
       </div>
     );

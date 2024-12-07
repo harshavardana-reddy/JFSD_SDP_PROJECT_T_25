@@ -49,5 +49,9 @@ public interface StudentService {
 	AssignmentDTO getAssignment(String aid);
 
 	SubmissionDTO getSubmission(String subid);
+
+	List<AssignmentDTO> viewUploadedAssignments(String courseId);
+
+	Course getCourse(String cid);
 	 
 }

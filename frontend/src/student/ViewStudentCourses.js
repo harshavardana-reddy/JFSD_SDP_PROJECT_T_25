@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackendURLS from "../config";
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Button, Pagination, Input } from "@nextui-org/react";
 
@@ -99,7 +99,7 @@ export default function ViewStudentCourses() {
                 <TableCell>{course.courseInstructorID}</TableCell>
                 <TableCell>{course.courseInstructorName}</TableCell>
                 <TableCell>
-                  <Button  >View Assignments</Button>
+                  <Button as={Link} to={`/student/courseassignments/${course.cid}`}>View Assignments</Button>
                 </TableCell>
               </TableRow>
             ))}
