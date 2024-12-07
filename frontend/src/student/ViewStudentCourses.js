@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import BackendURLS from "../config";
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Button, Pagination, Input } from "@nextui-org/react";
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Button, Pagination, Input, Spinner } from "@nextui-org/react";
 
 
 export default function ViewStudentCourses() {
@@ -12,7 +12,8 @@ export default function ViewStudentCourses() {
   const [searchQuery, setSearchQuery] = useState(""); 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [isLoading,SetIsLoading] = useState(true);
 
   const fetchCourses = async () => {
     try {
@@ -20,6 +21,7 @@ export default function ViewStudentCourses() {
         `${BackendURLS.Student}/viewstudentcourses?id=${student.sid}`
       );
       setCourseData(response.data);
+      SetIsLoading(false);
     } catch (error) {
       console.log(error.response?.data || error.message);
     }
@@ -35,8 +37,10 @@ export default function ViewStudentCourses() {
   },[])
 
   useEffect(() => {
-    fetchCourses();
-  }, [student.sid]);
+    if(student){
+      fetchCourses();
+    }
+  }, []);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -57,6 +61,21 @@ export default function ViewStudentCourses() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentCourses = filteredCourses.slice(indexOfFirstItem, indexOfLastItem);
+
+  const spinnerContainerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+  };
+
+  if (isLoading) {
+    return (
+      <div style={spinnerContainerStyle}>
+        <Spinner label="Loading..." color="warning" size="lg" />
+      </div>
+    );
+  }
 
 
   return (
