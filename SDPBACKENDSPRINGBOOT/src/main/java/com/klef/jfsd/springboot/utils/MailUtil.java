@@ -179,11 +179,11 @@ public class MailUtil {
 			context.setVariable("sem", sem);
 			context.setVariable("academicyear", academicyear);
 			context.setVariable("code", code);
-			String process = templateEngine.process("PasswordChanged.html", context);
+			String process = templateEngine.process("CourseAdded.html", context);
 			MimeMessageHelper helper = new MimeMessageHelper(message,MimeMessageHelper.MULTIPART_MODE_MIXED,StandardCharsets.UTF_8.name());
 			helper.setFrom(senderMail);
 			helper.setTo(email);
-			helper.setSubject("ACCOUNT ACTIVITY");
+			helper.setSubject("NEW COURSE ADDED");
 			helper.setText(process,true);
 			mailSender.send(message);
 			System.out.println("Success");
