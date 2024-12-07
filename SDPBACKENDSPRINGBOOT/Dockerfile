@@ -1,5 +1,5 @@
 # Build stage
-FROM maven:3.6.0-jdk-17-slim AS build
+FROM maven:3.8.4-openjdk-17-slim AS build
 
 # Set the working directory inside the container
 WORKDIR /app
