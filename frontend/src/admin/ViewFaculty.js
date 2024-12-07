@@ -252,14 +252,14 @@ export default function ViewFaculty() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem
+                {/* <DropdownItem
                   aria-label="View"
                   onClick={() =>
                     navigate(`/admin/viewfaculty/${user.filterid}`)
                   }
                 >
                   View
-                </DropdownItem>
+                </DropdownItem> */}
                 <DropdownItem
                   aria-label="Edit"
                   onClick={() =>
@@ -269,7 +269,7 @@ export default function ViewFaculty() {
                   Edit
                 </DropdownItem>
                 
-                <DropdownItem
+                {/* <DropdownItem
                   aria-label="Set Status"
                   onClick={() => {
                     setfacultyIDS(user.fid);
@@ -277,8 +277,8 @@ export default function ViewFaculty() {
                   }}
                 >
                   Set Status
-                </DropdownItem>
-                <DropdownItem
+                </DropdownItem> */}
+                {/* <DropdownItem
                   color="danger"
                   variant="shadow"
                   aria-label="Delete"
@@ -288,7 +288,7 @@ export default function ViewFaculty() {
                   }}
                 >
                   Delete
-                </DropdownItem>
+                </DropdownItem> */}
               </DropdownMenu>
 
             </Dropdown>
