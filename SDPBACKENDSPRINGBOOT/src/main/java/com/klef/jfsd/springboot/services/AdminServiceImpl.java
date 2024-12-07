@@ -2,10 +2,11 @@ package com.klef.jfsd.springboot.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -75,41 +76,74 @@ public class AdminServiceImpl implements AdminService {
 		student.setSid(c_sid);
 		student.setSstatus("ACTIVE");
 		student.setPassword(student.getDob());
-		String filePath = getClass().getClassLoader().getResource("noimage.jpg").getPath();
-		try {
-			byte[] fileBytes = readFileToByteArray(filePath);
+
+		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("noimage.jpg")) {
+			if (inputStream == null) {
+				throw new FileNotFoundException("File 'noimage.jpg' not found in resources.");
+			}
+			byte[] fileBytes = inputStream.readAllBytes();
 			Blob blob = new javax.sql.rowset.serial.SerialBlob(fileBytes);
 			student.setSprofile(blob);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "Error setting profile: " + e.getMessage();
 		}
-		studentRepository.save(student);
-		mailUtil.sendStudentMail(student.getSemail(), student.getSname(), student.getSid());
-		return "Student Added Succesfully with ID =" + c_sid;
+
+		try {
+			studentRepository.save(student);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error saving student: " + e.getMessage();
+		}
+
+		try {
+			mailUtil.sendStudentMail(student.getSemail(), student.getSname(), student.getSid());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Student added but email could not be sent: " + e.getMessage();
+		}
+
+		return "Student Added Successfully with ID = " + c_sid;
 	}
+
 
 	@Override
 	public String AddFaculty(Faculty faculty) {
 		int fid = 1000 + new Random().nextInt(9000);
 		String s_fid = Integer.toString(fid);
 		faculty.setFid(s_fid);
-		;
 		faculty.setFstatus("ACTIVE");
 		faculty.setPassword(faculty.getDob());
-		String filePath = "src/main/resources/noimage.jpg";
-		try {
-			byte[] fileBytes = readFileToByteArray(filePath);
-			Blob blob = new SerialBlob(fileBytes);
+
+		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("noimage.jpg")) {
+			if (inputStream == null) {
+				throw new FileNotFoundException("File 'noimage.jpg' not found in resources.");
+			}
+			byte[] fileBytes = inputStream.readAllBytes();
+			Blob blob = new javax.sql.rowset.serial.SerialBlob(fileBytes);
 			faculty.setFprofile(blob);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "Error setting profile: " + e.getMessage();
 		}
-		facultyRepository.save(faculty);
-		mailUtil.sendFacultyMail(faculty.getFemail(), faculty.getFname(), faculty.getFid());
-		return "Faculty Added Succesfully with ID =" + s_fid;
+
+		try {
+			facultyRepository.save(faculty);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error saving faculty: " + e.getMessage();
+		}
+
+		try {
+			mailUtil.sendFacultyMail(faculty.getFemail(), faculty.getFname(), faculty.getFid());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Faculty added but email could not be sent: " + e.getMessage();
+		}
+
+		return "Faculty Added Successfully with ID = " + s_fid;
 	}
+
 
 	@Override
 	public String AddCourse(Course course) {
