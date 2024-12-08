@@ -211,7 +211,7 @@ export default function FacultyNavbar() {
         <Route path="/faculty/facultyreviewassignment/:subid" element={<FacultyReviewAssignment/>}/>
         <Route path="/faculty/view-assignment-pdf" element={<ViewPDF/>} />
         <Route path="/faculty/view-submission-pdf" element={<ViewPDF/>} />
-        <Route path="/student/coureseregisteredstudents/:cid" element={<CourseRegisteredStudents/>} />
+        <Route path="/faculty/coureseregisteredstudents/:cid" element={<CourseRegisteredStudents/>} />
         <Route path="*" element={<PageNotFound/>} />
       </Routes>
 
